@@ -25,10 +25,41 @@
             font-size: 24px;
             font-weight: bold;
         }
+        #countdown {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #d500f9; /* Bright purple */
+        }
     </style>
 </head>
 <body>
-    <h1>Can't Wait To See You on the 14th! ❤️</h1>
+    <h1>Can't Wait to See You on the 14th! ❤️</h1>
     <img src="https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif" alt="Cute Baby GIF">
+    <p id="countdown">Loading countdown...</p>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date(new Date().getFullYear(), 1, 14, 0, 0, 0); // February 14th
+            const now = new Date();
+            const timeDiff = targetDate - now;
+
+            if (timeDiff <= 0) {
+                document.getElementById("countdown").innerHTML = "Happy Valentine's Day! ❤️";
+                return;
+            }
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${days}d ${hours}h ${minutes}m ${seconds}s left!`;
+        }
+
+        updateCountdown(); // Initial call
+        setInterval(updateCountdown, 1000); // Update every second
+    </script>
 </body>
 </html>
